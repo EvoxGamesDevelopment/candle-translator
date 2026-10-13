@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es" data-theme="business">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' wss://stream.binance.com:9443">
+  <title>Candle Translator</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body class="bg-base-100 text-base-content flex flex-col">
+
+  <!-- Barra superior: activo, precio, idioma y fijar ventana -->
+  <header class="flex items-center gap-2 px-2 py-1.5 border-b border-base-300">
+    <input id="activo" list="lista-activos" class="input input-xs w-24 uppercase font-semibold" value="BTC" spellcheck="false" autocomplete="off">
+    <datalist id="lista-activos"></datalist>
+    <div class="flex items-baseline gap-1.5 min-w-0">
+      <span id="precio" class="font-semibold tabular-nums">—</span>
+      <span id="cambio" class="text-xs tabular-nums"></span>
+    </div>
+    <div class="ml-auto flex items-center gap-1">
+      <div class="join">
+        <button class="btn btn-xs join-item" data-idioma="es">ES</button>
+        <button class="btn btn-xs join-item" data-idioma="en">EN</button>
+      </div>
+      <label id="lbl-encima" class="tooltip tooltip-left flex items-center gap-1 cursor-pointer">
+        <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 opacity-70" fill="currentColor"><path d="M16 3l5 5-3 1-4 4 1 5-2 2-4-4-5 5-1-1 5-5-4-4 2-2 5 1 4-4z"/></svg>
+        <input id="encima" type="checkbox" class="toggle toggle-xs" checked>
+      </label>
+    </div>
+  </header>
+
+  <main class="flex-1 overflow-y-auto overflow-x-hidden px-2 py-2 space-y-2">
+    <div id="aviso-version" class="alert alert-success alert-soft py-1 px-2 text-xs hidden">
+      <span id="texto-version"></span>
+      <button id="btn-version" class="btn btn-xs btn-success whitespace-nowrap"></button>
+    </div>
+    <div id="aviso-oro" class="alert alert-info alert-soft py-1 px-2 text-xs hidden"></div>
+    <div id="aviso-fuente" class="text-[11px] opacity-60 hidden"></div>
+
+    <!-- Estado de cada temporalidad -->
+    <div id="estados" class="flex flex-wrap gap-1"></div>
+
+    <!-- Lectura -->
+    <section class="space-y-1">
+      <h1 id="titulo" class="font-semibold text-sm leading-snug"></h1>
+      <p id="resumen" class="text-xs leading-relaxed opacity-90"></p>
+      <p id="decide" class="text-xs leading-relaxed opacity-90"></p>
+      <div id="patrones" class="flex flex-wrap gap-1"></div>
+      <button id="btn-explicar" class="btn btn-ghost btn-xs px-1 text-primary"></button>
+      <div id="detalle" class="hidden space-y-2 text-xs leading-relaxed border-l-2 border-base-300 pl-2"></div>
+    </section>
+
+    <!-- Mini gráfica -->
+    <section>
+      <div role="tablist" id="pestanas" class="tabs tabs-box tabs-xs mb-1"></div>
+      <div id="grafica" class="w-full h-44 rounded-box bg-base-200"></div>
+    </section>
+
+    <!-- Avisos en vivo -->
+    <section>
+      <h2 id="titulo-avisos" class="text-[11px] uppercase tracking-wide opacity-60 mb-1"></h2>
+      <ul id="avisos" class="space-y-0.5 text-xs"></ul>
+    </section>
+
+    <p id="nota" class="text-[10px] opacity-50 leading-snug"></p>
+  </main>
+
+  <footer class="flex items-center justify-center gap-1.5 py-1 border-t border-base-300">
+    <img src="assets/mascara.png" alt="" class="h-5 w-5">
+    <img src="assets/letras.png" alt="EVOX Games Development" class="h-4">
+    <span id="version" class="text-[10px] opacity-40 tabular-nums"></span>
+  </footer>
+
+  <script src="../node_modules/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+  <script src="textos.js"></script>
+  <script src="analisis.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

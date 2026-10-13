@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@source "./";
+@plugin "daisyui" {
+  themes: business --default;
+}
+
+html, body { height: 100%; }
+body { font-size: 13px; }
+.termino { border-bottom: 1px dotted currentColor; cursor: help; }
+.tooltip:before { max-width: 240px; font-size: 11px; text-align: left; line-height: 1.35; }
+.flecha-sube { color: var(--color-success); }
+.flecha-baja { color: var(--color-error); }
+.flecha-lado { color: var(--color-warning); }

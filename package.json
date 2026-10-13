@@ -1,0 +1,76 @@
+{
+  "name": "candle-translator",
+  "version": "0.1.0",
+  "description": "Lee las velas y las explica en español sencillo. Hecho por EVOX Games Development.",
+  "main": "src/main.js",
+  "scripts": {
+    "css": "tailwindcss -i src/input.css -o src/estilos.css --minify",
+    "start": "npm run css && electron .",
+    "dist": "npm run css && electron-builder"
+  },
+  "author": "EVOX Games Development",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "daisyui": "^5.7.48",
+    "electron": "^44.7.0",
+    "electron-builder": "^26.15.3",
+    "tailwindcss": "^4.3.3"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9",
+    "lightweight-charts": "^5.2.1"
+  },
+  "productName": "Candle Translator",
+  "build": {
+    "appId": "com.evoxgames.candletranslator",
+    "productName": "Candle Translator",
+    "files": [
+      "src/**/*",
+      "!src/input.css",
+      "build/icon.png"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": true,
+      "artifactName": "CandleTranslator-Windows-${version}.exe"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "icon": "build/icon.png",
+      "category": "public.app-category.finance",
+      "identity": null
+    },
+    "dmg": {
+      "artifactName": "CandleTranslator-Mac-${version}.dmg"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "EvoxGamesDevelopment",
+        "repo": "candle-translator"
+      }
+    ]
+  }
+}
