@@ -316,6 +316,39 @@ async function llenarLista() {
   $('lista-activos').innerHTML = lista.map(s => `<option value="${s}">`).join('');
 }
 
+// ---------- explicaciones al pasar el mouse ----------
+// Un solo globo que se acomoda para quedar siempre completo dentro de la ventana.
+const globo = document.createElement('div');
+globo.id = 'globo';
+document.body.appendChild(globo);
+let ancla = null;
+
+function mostrarGlobo(el) {
+  const tip = el.dataset.tip;
+  if (!tip) return;
+  ancla = el;
+  globo.textContent = tip;
+  globo.style.display = 'block';
+  const r = el.getBoundingClientRect();
+  const g = globo.getBoundingClientRect();
+  const m = 6;
+  let x = r.left + r.width / 2 - g.width / 2;
+  x = Math.max(m, Math.min(x, window.innerWidth - g.width - m));
+  let y = r.bottom + m;
+  if (y + g.height > window.innerHeight - m) y = Math.max(m, r.top - g.height - m);
+  globo.style.left = x + 'px';
+  globo.style.top = y + 'px';
+}
+function ocultarGlobo() { ancla = null; globo.style.display = 'none'; }
+
+document.addEventListener('mouseover', e => {
+  const el = e.target.closest('.tooltip[data-tip]');
+  if (el && el !== ancla) mostrarGlobo(el);
+  else if (!el && ancla) ocultarGlobo();
+});
+document.addEventListener('scroll', ocultarGlobo, true);
+window.addEventListener('blur', ocultarGlobo);
+
 // ---------- actualizaciones ----------
 let actualizacion = null;
 function pintarVersion() {

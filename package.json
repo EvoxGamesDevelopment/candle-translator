@@ -1,6 +1,6 @@
 {
   "name": "candle-translator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Lee las velas y las explica en español sencillo. Hecho por EVOX Games Development.",
   "main": "src/main.js",
   "scripts": {

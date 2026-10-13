@@ -7,7 +7,11 @@
 html, body { height: 100%; }
 body { font-size: 13px; }
 .termino { border-bottom: 1px dotted currentColor; cursor: help; }
-.tooltip:before { max-width: 240px; font-size: 11px; text-align: left; line-height: 1.35; }
+/* El globo lo pone app.js (se acomoda dentro de la ventana); se apaga el de daisyUI. */
+.tooltip:before, .tooltip:after { display: none !important; }
+#globo { position: fixed; z-index: 50; display: none; pointer-events: none; max-width: 240px;
+  padding: 4px 8px; border-radius: 6px; font-size: 11px; line-height: 1.35; text-align: left;
+  background: var(--color-neutral); color: var(--color-neutral-content); }
 .flecha-sube { color: var(--color-success); }
 .flecha-baja { color: var(--color-error); }
 .flecha-lado { color: var(--color-warning); }
