@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Candle Translator</h1>
-<p align="center"><b>by EVOX Games Development</b> · versión / version <b>0.1.0</b></p>
+<p align="center"><b>by EVOX Games Development</b> · versión / version <b>0.1.1</b></p>
 
 <p align="center">
   Lee las velas y te explica en lenguaje sencillo lo que está pasando.<br>
@@ -40,14 +40,14 @@ Es **gratis**, no necesita cuenta y no se conecta a tu exchange: solo lee precio
 
 #### Windows
 
-1. Entra a **[Releases](../../releases/latest)** y descarga **`CandleTranslator-Windows-0.1.0.exe`**.
+1. Entra a **[Releases](../../releases/latest)** y descarga **`CandleTranslator-Windows-0.1.1.exe`**.
 2. Abre el archivo descargado.
 3. Si aparece **"Windows protegió su PC"**, haz clic en **"Más información"** y luego en **"Ejecutar de todos modos"**. Sale porque el programa es gratuito y no está firmado con un certificado de pago.
 4. Se instala solo y se abre. La próxima vez lo encuentras en el menú Inicio como **Candle Translator**.
 
 #### Mac
 
-1. Entra a **[Releases](../../releases/latest)** y descarga **`CandleTranslator-Mac-0.1.0.dmg`**.
+1. Entra a **[Releases](../../releases/latest)** y descarga **`CandleTranslator-Mac-0.1.1.dmg`**.
 2. Abre el archivo y arrastra **Candle Translator** a la carpeta **Aplicaciones**.
 3. Ábrelo desde Aplicaciones. La primera vez, Mac te dirá que no puede verificarlo: cierra el aviso.
 4. Ve a **Configuración del Sistema → Privacidad y seguridad**, baja hasta el mensaje de *Candle Translator* y haz clic en **"Abrir de todos modos"**.
@@ -68,7 +68,9 @@ xattr -cr "/Applications/Candle Translator.app"
 
 ### Actualizaciones y próximas mejoras
 
-Esta es la **versión 0.1.0**, la primera. Vamos a seguir subiendo mejoras.
+Versión actual: **0.1.1**. Vamos a seguir subiendo mejoras.
+
+**Novedades de la 0.1.1:** al hacer clic en el cuadro de la cripto se muestra la lista completa; ya no aparecen monedas retiradas (como BTCDOWN), y si escribes una que ya no se opera, el programa te lo dice en lugar de mostrar datos viejos.
 
 - **En Windows** el programa **se actualiza solo**: descarga la versión nueva y la instala al cerrarlo.
 - **En Mac** te avisa cuando hay una versión nueva, con un botón para descargarla.
@@ -114,14 +116,14 @@ It is **free**, needs no account and never connects to your exchange account: it
 
 #### Windows
 
-1. Go to **[Releases](../../releases/latest)** and download **`CandleTranslator-Windows-0.1.0.exe`**.
+1. Go to **[Releases](../../releases/latest)** and download **`CandleTranslator-Windows-0.1.1.exe`**.
 2. Open the downloaded file.
 3. If you see **"Windows protected your PC"**, click **"More info"** and then **"Run anyway"**. This appears because the app is free and not signed with a paid certificate.
 4. It installs and opens by itself. Next time you will find it in the Start menu as **Candle Translator**.
 
 #### Mac
 
-1. Go to **[Releases](../../releases/latest)** and download **`CandleTranslator-Mac-0.1.0.dmg`**.
+1. Go to **[Releases](../../releases/latest)** and download **`CandleTranslator-Mac-0.1.1.dmg`**.
 2. Open the file and drag **Candle Translator** into the **Applications** folder.
 3. Open it from Applications. The first time, macOS will say it cannot verify it: close the message.
 4. Go to **System Settings → Privacy & Security**, scroll to the *Candle Translator* message and click **"Open Anyway"**.
@@ -142,7 +144,9 @@ xattr -cr "/Applications/Candle Translator.app"
 
 ### Updates and upcoming improvements
 
-This is **version 0.1.0**, the first release. More improvements are on the way.
+Current version: **0.1.1**. More improvements are on the way.
+
+**What's new in 0.1.1:** clicking the crypto box now shows the full list; delisted coins (like BTCDOWN) no longer appear, and if you type one that is no longer traded, the app tells you instead of showing old data.
 
 - **On Windows** the app **updates itself**: it downloads the new version and installs it when you close the app.
 - **On Mac** it lets you know when a new version is available, with a button to download it.

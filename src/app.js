@@ -34,6 +34,11 @@ async function pedirTodo(base, fuente) {
   await Promise.all(['1m', ...TFS].map(async tf => {
     res[tf] = await window.ct.velas(base, tf, tf === '1m' ? 60 : 300, fuente);
   }));
+  // Una moneda retirada sigue entregando sus velas viejas: si la última hora no se operó, no sirve.
+  const ult = res['1h']?.at(-1);
+  if (!ult || ult.t * 1000 < Date.now() - 3 * 3600000) {
+    const e = new Error('retirada'); e.retirada = true; throw e;
+  }
   return res;
 }
 
@@ -47,7 +52,10 @@ async function cargar(base) {
   try {
     let datos, fuente = 'binance';
     try { datos = await pedirTodo(base, 'binance'); }
-    catch { datos = await pedirTodo(base, 'okx'); fuente = 'okx'; }
+    catch (e1) {
+      try { datos = await pedirTodo(base, 'okx'); fuente = 'okx'; }
+      catch (e2) { if (e1.retirada || e2.retirada || /51001|exist|Invalid symbol|400/.test(e1.message + e2.message)) { e2.retirada = true; } throw e2; }
+    }
     if (gen !== estado.generacion) return;
     estado.datos = datos; estado.fuente = fuente;
     TFS.forEach(tf => (estado.lecturas[tf] = window.Analisis.leer(datos[tf])));
@@ -56,6 +64,14 @@ async function cargar(base) {
     conectarVivo(base, gen);
   } catch (e) {
     if (gen !== estado.generacion) return;
+    if (e.retirada) {
+      $('titulo').textContent = tx().retirada(base);
+      $('precio').textContent = '—'; $('cambio').textContent = '';
+      estado.datos = {}; estado.junta = null;
+      ['estados', 'patrones', 'detalle', 'resumen', 'decide'].forEach(id => ($(id).innerHTML = ''));
+      if (serie) { serie.setData([]); lineas.forEach(x => serie.removePriceLine(x)); lineas = []; marcas.setMarkers([]); }
+      return;
+    }
     $('titulo').textContent = tx().error;
     setTimeout(() => gen === estado.generacion && cargar(base), 10000);
   }
@@ -277,6 +293,8 @@ $('activo').addEventListener('change', e => {
   if (base && base !== estado.base) cargar(base);
 });
 $('activo').addEventListener('keydown', e => { if (e.key === 'Enter') e.target.blur(); });
+$('activo').addEventListener('focus', e => { e.target.value = ''; });
+$('activo').addEventListener('blur', e => { setTimeout(() => { if (!e.target.value.trim()) e.target.value = estado.base; }, 0); });
 document.querySelectorAll('[data-idioma]').forEach(b => b.addEventListener('click', () => {
   estado.idioma = b.dataset.idioma; guardar('idioma', estado.idioma); pintarTodo();
 }));

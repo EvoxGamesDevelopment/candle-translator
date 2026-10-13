@@ -72,12 +72,15 @@ ipcMain.handle('velas', async (_e, { base, tf, limite, fuente }) => {
 });
 
 ipcMain.handle('simbolos', async () => {
+  // Solo monedas que se siguen operando (las retiradas, como BTCDOWN, no aparecen).
   try {
-    const j = await pedirJSON('https://api.binance.com/api/v3/ticker/price');
-    return j.map(x => x.symbol).filter(s => s.endsWith('USDT')).map(s => s.slice(0, -4)).sort();
+    const j = await pedirJSON('https://api.binance.com/api/v3/ticker/24hr?type=MINI');
+    const hace1dia = Date.now() - 86400000;
+    return j.filter(x => x.symbol.endsWith('USDT') && x.closeTime > hace1dia && +x.volume > 0)
+      .map(x => x.symbol.slice(0, -4)).sort();
   } catch {
     const j = await pedirJSON('https://www.okx.com/api/v5/public/instruments?instType=SPOT');
-    return j.data.filter(x => x.quoteCcy === 'USDT').map(x => x.baseCcy).sort();
+    return j.data.filter(x => x.quoteCcy === 'USDT' && x.state === 'live').map(x => x.baseCcy).sort();
   }
 });
 
