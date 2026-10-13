@@ -186,9 +186,10 @@ function pintarTodo() {
   document.documentElement.lang = idioma;
   pintarPrecio();
 
-  $('estados').innerHTML = TFS.map(tf => {
+  $('estados').innerHTML = TFS.map((tf, i) => {
     const tend = L[tf]?.tendencia;
-    return `<span class="badge badge-sm badge-ghost gap-1"><span class="opacity-70">${t.tf[tf]}</span><span class="flecha-${tend}">${flecha(tend)}</span></span>`;
+    const tip = tend ? t.tendenciaTip[tend](t.tf[tf]) : '';
+    return `<span class="tooltip ${i < 2 ? 'tooltip-right' : 'tooltip-left'}" data-tip="${tip}"><span class="badge badge-sm badge-ghost gap-1 cursor-help"><span class="opacity-70">${t.tf[tf]}</span><span class="flecha-${tend}">${flecha(tend)}</span></span></span>`;
   }).join('');
 
   if (j) {

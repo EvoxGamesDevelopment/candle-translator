@@ -60,6 +60,11 @@ const T = {
     reiniciar: 'Reiniciar ahora', descargar: 'Descargar',
     tf: { '15m': '15 min', '1h': '1 h', '4h': '4 h', '1d': 'Diario' },
     tendencia: { sube: 'de subida', baja: 'de bajada', lado: 'de lado' },
+    tendenciaTip: {
+      sube: (tf) => `▲ ${tf}: va de subida. En esta temporalidad el precio está arriba de su promedio y el promedio va subiendo.`,
+      baja: (tf) => `▼ ${tf}: va de bajada. En esta temporalidad el precio está abajo de su promedio y el promedio va bajando.`,
+      lado: (tf) => `▬ ${tf}: va de lado. No hay una dirección clara: el precio se mueve dentro de un rango.`,
+    },
     casos: {
       todo_sube: ['Todo a favor de la subida.', 'Las cuatro temporalidades van de subida: el movimiento chico y el grande apuntan al mismo lado.'],
       todo_baja: ['Todo a favor de la bajada.', 'Las cuatro temporalidades van de bajada: el movimiento chico y el grande apuntan al mismo lado.'],
@@ -117,6 +122,11 @@ const T = {
     reiniciar: 'Restart now', descargar: 'Download',
     tf: { '15m': '15m', '1h': '1h', '4h': '4h', '1d': 'Daily' },
     tendencia: { sube: 'up', baja: 'down', lado: 'sideways' },
+    tendenciaTip: {
+      sube: (tf) => `▲ ${tf}: uptrend. On this timeframe price is above its average and the average is rising.`,
+      baja: (tf) => `▼ ${tf}: downtrend. On this timeframe price is below its average and the average is falling.`,
+      lado: (tf) => `▬ ${tf}: sideways. No clear direction: price is moving within a range.`,
+    },
     casos: {
       todo_sube: ['Everything points up.', 'All four timeframes are in an uptrend: the short and long-term moves point the same way.'],
       todo_baja: ['Everything points down.', 'All four timeframes are in a downtrend: the short and long-term moves point the same way.'],
